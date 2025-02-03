@@ -4,19 +4,13 @@
 docker compose up -d
 ```
 
-## Check if setup.sh Ran Successfully
-
-```sh
-docker logs kali-osint
-```
-
 ## Enter the Kali container
 
 ```sh
 docker exec -it kali-osint bash
 ```
 
-## Verify torproxy
+## Verify torproxy (optional, need to install curl first)
 
 ```sh
 curl --proxy socks5h://tor-proxy:9050 https://check.torproject.org
@@ -28,10 +22,22 @@ curl --proxy socks5h://tor-proxy:9050 https://check.torproject.org
 source /opt/venv/bin/activate
 ```
 
+## Change directory
+
+```sh
+cd /opt/PhoneInfoga/bin
+```
+
+## Install PhoneInfoga
+
+```sh
+../support/scripts/install
+```
+
 ## Run PhoneInfoga
 
 ```sh
-proxychains python3 /opt/PhoneInfoga/phoneinfoga.py -n "+15551234567" | tee /osint_results/phoneinfoga_results.txt
+proxychains /opt/PhoneInfoga/bin/phoneinfoga scan -n "+15551234567" | tee /osint_results/phoneinfoga_results.txt
 ```
 
 ## Run Sherlock
